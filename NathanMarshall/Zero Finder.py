@@ -4,8 +4,8 @@ Created on Thu Aug 29 13:33:36 2019
 Nathan Marshall
 
 This algorithm searches for the zeros of a discrete function f(x). First, the 
-algorithm searches for places where the product of two adjacent points switches
-is negative. This indicates a zero crossing, and then a simple interpolation is 
+algorithm searches for places where the product of two adjacent points is
+negative. This indicates a zero crossing, and then a simple interpolation is 
 applied to more accurately approximate for what x f(x) is equal to zero. If no 
 zero crossing is detected, the approximate derivative is calculated at each 
 point in f(x). When a switch in the sign of the derivative is detected, this 

@@ -31,9 +31,4 @@ factors = np.sort(factors)[::-1] #sorting factors from greatest to least
 for i in factors: #looping through the factors
     if isprime(i) == True: #if a prime is detected, it is the largest 
         print(i, 'is the largest prime factor of', num)
-        break
-
-        
-        
-        
-    
+        break   

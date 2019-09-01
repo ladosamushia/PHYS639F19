@@ -22,26 +22,4 @@ both = np.unique(both) #keep only the unique values in the concatenation
 total = 0 #initially set total sum to 0
 for i in both: #loop through all the multiples and sum them up
     total += i
-print('The sum of the multiples of 3 or 5 up to 1000 is:', total
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      ) #display sum
+print('The sum of the multiples of 3 or 5 up to 1000 is:', total) #display sum

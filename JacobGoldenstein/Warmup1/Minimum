@@ -1,1 +1,16 @@
+import numpy as np
+num = 100000
+xmin = -10
+xmax = 10
+x = np.linspace(xmin, xmax, num)
+fx = x**2
 
+minimum = fx[0]
+min_idx = 0
+ctr = 0
+for fxi in fx:
+    if fxi < minimum:
+        minimum = fxi
+        min_idx = ctr
+    ctr +=1
+print(minimum)

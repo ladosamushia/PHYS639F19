@@ -1,1 +1,11 @@
+import numpy as np
+num = 10
+xmin = -1
+xmax = 1
+x = np.linspace(xmin, xmax, num)
+fx = np.sin(x)
 
+for i in range(0,num-1):
+    product = fx[i]*fx[i+1]
+    if product < 0:
+        print((x[i]+x[i+1])/2)

@@ -1,9 +1,13 @@
+## Defining a function to solve for its zeros by subdividing the interval into 10 evenly spaced regions
+
 import numpy as np
 num = 10
 xmin = -1
 xmax = 1
 x = np.linspace(xmin, xmax, num)
 fx = np.sin(x)
+
+## Multiplying the product of two consecutive points in order to see if it is positive, negative, or zero
 
 for i in range(0,num-1):
     product = fx[i]*fx[i+1]

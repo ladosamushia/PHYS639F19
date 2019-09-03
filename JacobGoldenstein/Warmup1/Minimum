@@ -1,9 +1,15 @@
+## Define a function with a large subdivision of steps in order to find the absolute minimum of the function
+
 import numpy as np
 num = 100000
 xmin = -10
 xmax = 10
 x = np.linspace(xmin, xmax, num)
 fx = x**2
+
+## After each step, we store the new lowest value
+## If the new value is lower than the previous, then the new lowest is stored
+## The absolute lowest value is returned once the boundary is reached
 
 minimum = fx[0]
 min_idx = 0

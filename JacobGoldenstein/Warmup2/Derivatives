@@ -1,0 +1,23 @@
+## Define step size
+## Set point for derivative
+
+dx = 0.00001    
+x = np.pi/2    
+
+## Define function to differentiate
+
+def f(x):                     
+    return(np.sin(x))
+    
+## Define the formula for a numerical derivative
+
+def dfdx(x, dx, f):           
+    return((f(x+dx)-f(x-dx))/(dx*2))
+    
+## Define formula for numerical 2nd derivative
+
+def d2fdx(x, dx, f, dfdx):    
+    return((dfdx(x+dx, dx, f)-dfdx(x-dx, dx, f))/(dx*2))
+
+print('The numerical derivative of np.sin(x) at x = np.pi/2 is',dfdx(x,dx,f))
+print('The numerical 2nd derivative of np.sin(x) at x = np.pi/2 is',d2fdx(x, dx, fx, dfdx))

@@ -3,7 +3,7 @@
 Created on Thu Sep  5 13:21:36 2019
 Nathan Marshall
 
-This code computes Fourier coefficents for an arbitrary function on the 
+This code computes Fourier coefficients for an arbitrary function on the 
 interval -pi to pi. As an example it is shown computing Fourier coefficients
 for a step function that is 0 for t < 0 and 1 for t >= 0. The actual function
 and Fourier approximation are displayed in a graph for comparison.

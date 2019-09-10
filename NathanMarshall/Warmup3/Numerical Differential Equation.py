@@ -10,7 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def dfdx(x):
-    '''Define functional form of the derivatived df/dx.'''
+    '''Define functional form of the derivative df/dx.'''
     return(x)
     
 dx = 0.0001 #step size

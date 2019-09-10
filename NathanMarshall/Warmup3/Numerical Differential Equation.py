@@ -17,20 +17,19 @@ dx = 0.0001 #step size
 x0 = 0 #initial condition for x
 f0 = 0 #initial condition for the solution curve f(x)
 xmax = 7 #max value of x
-x_list = [x0] #list to contain x values
+x = [x0] #list to contain x values
 fx = [f0] #list to contain function values
 
-x_i = x0 #variable to increment with each step
-while x_i < xmax: #loop until our increment variable is greater than xmax
-    fx.append(fx[-1] + dfdx(x_i)*dx) #add df/dx * dx to previous f(x)
-    x_i += dx #increment our variable
-    x_list.append(x_i) #add new x value to the list
+
+while x[-1] < xmax: #loop until our increment variable is greater than xmax
+    fx.append(fx[-1] + dfdx(x[-1])*dx) #add df/dx * dx to previous f(x)
+    x.append(x[-1] + dx) #add new x value to the list
 
 
 t = np.linspace(x0, xmax, 1000) #test case variable
 ft = t**2/2 #test case function
 
 plt.plot(t, ft, label='Analytical Result') #plotting test case
-plt.plot(x_list, fx, label='Numerical Result') #plotting numerical result
+plt.plot(x, fx, label='Numerical Result') #plotting numerical result
 plt.grid(True)
 plt.legend()

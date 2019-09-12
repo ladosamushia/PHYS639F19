@@ -13,7 +13,7 @@ fstart = 0
 f0 = -1
 xi = -2*np.pi
 xf = 2*np.pi
-dx = .01
+dx = .0001
 #define 2 arrays: store x and y values
 x = np.array([fstart])
 y = np.array([f0])
@@ -21,7 +21,8 @@ i = fstart-dx
 while i >xi:
     xval = np.array([i]) #incrment x
     x = np.concatenate((x,xval)) #add to arrat
-    yval = y[-1]-fprime(i)*dx #incrment y
+    dfdx = ((1+np.cos(i))/(1+y[-1]+y[-1]))
+    yval = y[-1]-dfdx*dx #incrment y
     yval = np.array([yval])
     y = np.concatenate((y,yval))
     i = i-dx
@@ -32,12 +33,11 @@ y=np.flip(y)
 while i<xf:
     xval = np.array([i])
     x = np.concatenate((x,xval))
-    yval = y[-1]+fprime(i)*dx
+    dfdx = (1+np.cos(i))/(1+2*y[-1])
+    yval = y[-1]+dfdx*dx
     yval = np.array([yval])
     y = np.concatenate((y,yval))
     i = i+dx
 
 plt.plot(x,y)
-print(len(x))
-print(len(y)) 
     

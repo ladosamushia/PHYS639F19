@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 k = np.linspace(0.1, .8, 10) #range of decay rate constants
 
 def dndt(n, k):
-        '''Define functional form of radioactivity diff. eq.'''
+        '''Differential equation for the number of radioactive atoms.'''
         return(-n/k)
 
 for ki in k:    

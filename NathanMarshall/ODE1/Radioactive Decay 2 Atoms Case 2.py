@@ -12,11 +12,11 @@ ka = 0.5 #rate constant for decay of atom A
 kb = 0.5 #rate constant for decay of atom B
 
 def dn_adt(na, nb):
-    '''Define functional form of the derivative df/dx.'''
+    '''Differential equation for the number of atom A.'''
     return(-na/ka + nb/kb)
     
 def dn_bdt(na, nb):
-    '''Define functional form of radioactivity diff. eq.'''
+    '''Differential equation for the number of atom B.'''
     return(-nb/kb + na/ka)
 
 dt = 0.0001 #step size

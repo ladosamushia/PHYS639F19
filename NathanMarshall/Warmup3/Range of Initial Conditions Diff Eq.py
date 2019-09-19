@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 dx = 0.0001 #step size
 x0 = 0 #initial condition for x
-f0_range = np.linspace(-2, 2, 10) #initial conditions for the solution curve
+f0_range = np.linspace(-2, 2, 20) #initial conditions for the solution curve
 xmax = 10 #max value of x
 
 def diffeq(x0, f0, xmax, dx):

@@ -37,7 +37,7 @@ while t[-1] < tmax: #loop until tmax is reached
     
     
 plt.plot(t, na, label='Number of Atom A') #plotting numerical results
-plt.plot(t, nb, label = 'Number of Atom B')
+plt.plot(t, nb, label='Number of Atom B')
 plt.title('Numerical Solutions to Radioactive Decay Equation')
 plt.xlabel('Time (s)')
 plt.ylabel('Number of Radioactive Atoms')

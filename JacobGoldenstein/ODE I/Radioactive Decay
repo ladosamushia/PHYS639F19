@@ -1,0 +1,25 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+k = np.linspace(0.1, 1, 10)  ## decay constant rates
+
+def dndt(n, k):  ## differential equation for number of decays
+    return(-n/k)
+
+for ki in k:
+    dt = 0.0001  ## step size
+    t0 = 0       ## initial time
+    n0 = 250000  ## initial number of atoms
+    tmax = 5     ## max time
+    t = [t0]     ## list of t values
+    n = [n0]     ## list of number of atoms
+    
+    while t[-1] < tmax:  ## loop until t>tmax
+        n.append(n[-1] + dndt(n[-1],ki)*dt)  ## adding dn to previous n
+        t.append(t[-1] + dt)  ## adding dt to previous t
+        
+plt.plot(t,n) ## plot numerical result
+    
+plt.title('Numerical Solutions for Radioactive Decay')
+plt.xlabel('Time (s)')
+plt.ylabel('Number of Radioactive Atoms')

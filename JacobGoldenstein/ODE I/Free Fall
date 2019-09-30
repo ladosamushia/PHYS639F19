@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+g = -9.81  ## gravitational acceleration
+a = 0.1  ## drag coefficient
+dt = 0.0001  ##incrimental time
+t0 = 0  ## initial time
+v0 = np.linspace(0,-30,10)  ##range of initial conditions for velocity
+tmax = 10  ## max time
+
+
+def dvdt(v):  ## differential equation for free fall with linear drag
+    return(-g-a*v)
+
+def integrate(v0):  ## numerical integration for differential equation solving
+    t = [t0]  ## list for incrimental time values
+    v = [v0]  ## list for velocity values
+    
+    while t[-1] < tmax:  ## loop for t<tmax
+        v.append(v[-1] + dvdt(v[-1])*dt)  ## add dv to previous v
+        t.append(t[-1] + dt)  ## add dt to previous t
+    plt.plot(t,v, label='Numerical Result')
+ 
+for v0_i in v0:  ## find numerical solution for each initial velocity condition
+    integrate(v0_i)
+
+    plt.title('Free Fall Velocity with Linear Air Resistance')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Velocity (m/s)')
+    plt.grid()

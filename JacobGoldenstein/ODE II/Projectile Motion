@@ -1,0 +1,66 @@
+import numpy as np
+import matplotlib.pyplot as plt
+## initial conditions
+x0 = 0
+y0 = 0
+ti = 0
+g = 9.81
+tf = 100000
+dt = 0.0001
+## initial velocity
+v0 = 100
+## launch angle
+theta = 30
+## launch angle in radians
+rad = np.pi*theta/180
+## initial velocity in y direction
+vy0 = v0 * np.sin(rad)
+## initial velocity in x direction
+vx0 = v0 * np.cos(rad)
+## differential equation used for y position
+def d2ydt2 (vyi):
+    return (-g)
+## differential equation used for x position
+def d2xdt2 (vxi):
+    return (0)
+## time list
+t = [ti]
+## y position list
+y = [yi]
+## x position list
+x = [xi]
+## y velocity list
+vy = [vy0]
+## x velocity list
+vx = [vx0]
+## counter
+n = 0
+## while loop
+while ti<tf:
+    ## list of t values appended by loop
+    t.append(t0)
+    ## euler's method for x velocity
+    vx.append(vx[n-1]+d2xdt2(vx[n-1])*dt)
+    ## euler's method for x position
+    x.append(x[n-1]+vx[n]*dt)
+    ## euler's method for y velocity
+    vy.append(vy[n-1]+d2ydt2(vy[n-1])*dt)
+    ## euler's method for y position
+    y.append(y[n-1]+vy[n]*dt)
+    ## counter operation
+    n+=1
+    ## small time increment
+    ti+=dt
+    ## when object hits ground
+    if y[n]<0.00001:
+        ti = tf
+m = max(y)
+time = n/100
+print ('Time of Flight=')
+print (time)
+print ('Max height=')
+print (m)
+plt.plot(x,y)
+plt.title('Position of Projectile')
+plt.xlabel('x')
+plt.ylabel('y')

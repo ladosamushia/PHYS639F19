@@ -22,16 +22,19 @@ G = 6.67408e-11 #gravitational constant in m^3/(kg*s^2)
 #omega = 7.2921159e-5 #angular velocity of earth in rad/sec
 omega = 7.2921159e-3
 longitude = 0 * np.pi/180
-latitude = 90 * np.pi/180
+latitude = 0 * np.pi/180
 inclination = 45 * np.pi/180 
 angle = 0 * np.pi/180
 v = 1000
 x0 = R * np.cos(longitude) * np.sin(latitude)
 y0 = R * np.sin(longitude) * np.sin(latitude)
 z0 = R * np.cos(latitude)
-vx0 = v * np.sin(latitude - inclination) * np.cos(longitude - angle)
-vy0 = v * np.sin(latitude - inclination) * np.sin(longitude - angle)
-vz0 = v * np.cos(latitude - inclination)
+#vx0 = v * np.sin(latitude - inclination) * np.cos(longitude - angle)
+#vy0 = v * np.sin(latitude - inclination) * np.sin(longitude - angle)
+#vz0 = v * np.cos(latitude - inclination)
+vx0 = 1000
+vy0 = 1000
+vz0 = 1000
 
 
 dt = 0.001 #step size for time in seconds

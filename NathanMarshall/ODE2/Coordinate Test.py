@@ -13,8 +13,8 @@ import numpy as np
 
 longitude = 0 * np.pi/180 #longitude defined as regular longitude
 latitude = 45 * np.pi/180 #defined as angle from earth's north pole
-inclination = 0 * np.pi/180 #defined as the angle from vertical for an observer
-angle = 90 * np.pi/180 #defined as angle north of east for an observer
+inclination = 90 * np.pi/180 #defined as the angle from vertical for an observer
+angle = 1 * np.pi/180 #defined as angle north of east for an observer
 v = 1 #magnitude of initial velocity
 #determine velocity in x, y, and z as well as initial position on earth's sphere
 vx = v * np.sin(latitude - inclination) * np.cos(longitude - angle)

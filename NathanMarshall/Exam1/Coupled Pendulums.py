@@ -17,13 +17,13 @@ l2 = 1 #pendulum 2 length in m
 k = 1.5 #spring constant for coupling spring in N/m
 g = 9.81 #acceleration of gravity in m/s^2
 
-phi10 = 1 * np.pi/180 #initial angle pendulum 1 in degrees
+phi10 = 15 * np.pi/180 #initial angle pendulum 1 in degrees
 phi20 = 0 * np.pi/180 #initial angle pendulum 2 in degrees
 omega10 = 0 #initial angular velocity pendulum 1 in rad/sec
 omega20 = 0 #initial angular velocity pendulum 2 in rad/sec
 t0 = 0 #initial time
 tmax = 20 #max time to stop simulation
-dt = 0.0001 #time step size
+dt = 0.001 #time step size
 
 phi1 = [phi10] #list to contain angle 1 values
 phi2 = [phi20] #list to contain angle 2 values

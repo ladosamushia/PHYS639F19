@@ -3,7 +3,10 @@
 Created on Wed Oct  2 19:11:11 2019
 
 This code computes the orbital trajectories of a 3 body system and creates an
-animation of the result.
+animation of the result. The different part about this code is that the trails
+of the bodies in motion are deleted after they pass a certain length so the
+animation doesn't become too cluttered with trails, allowing for longer 
+simulations.
 """
 #%%
 import matplotlib.pyplot as plt
@@ -12,7 +15,7 @@ from matplotlib.animation import FuncAnimation as animate
 x10 = -1 #initial x mass 1
 y10 = 0 #initial y mass 1
 vx10 = 0 #initial x velocity mass 1
-vy10 = -1 #initial y velocity mass 1
+vy10 = -1.2 #initial y velocity mass 1
 
 x20 = 0.01 #initial x mass 2
 y20 = 0 #initial y mass 2
@@ -22,10 +25,10 @@ vy20 = 0 #initial y velocity mass 2
 x30 = 1 #initial x mass 3
 y30 = 0 #initial y mass 3
 vx30 = 0 #initial x velocity mass 3
-vy30 = 1 #initial y velocity mass 3
+vy30 = 1.2 #initial y velocity mass 3
 
 t0 = 0 #start time
-tmax = 20 #stop time
+tmax = 50 #stop time
 dt = 0.001 #time step size
 
 G = 1 #gravitational constant
@@ -93,7 +96,7 @@ ax.set_ylabel('Y (m)')
 ax.set_xlim(-2.5, 2.5)
 ax.set_ylim(-2.5, 2.5)
 #set number of frames
-num_frames = 600
+num_frames = 800
 step = round(len(x1)/num_frames) #step size for the plotted lists
 
 def animation(frame):
@@ -102,9 +105,12 @@ def animation(frame):
     for artist in plt.gca().lines + plt.gca().collections:
         artist.remove() #clear all previous plots each frame
     stop = frame * step #the index at which to stop plotting for current frame
-    ax.plot(x1[0:stop:step], y1[0:stop:step], color='b')
-    ax.plot(x2[0:stop:step], y2[0:stop:step], color='g')
-    ax.plot(x3[0:stop:step], y3[0:stop:step], color='r')
+    start = (frame - 20) * step
+    if start < 0:
+        start = 0
+    ax.plot(x1[start:stop:step], y1[start:stop:step], color='b')
+    ax.plot(x2[start:stop:step], y2[start:stop:step], color='g')
+    ax.plot(x3[start:stop:step], y3[start:stop:step], color='r')
     ax.scatter(x1[stop], y1[stop], color='b')
     ax.scatter(x2[stop], y2[stop], color='g')
     ax.scatter(x3[stop], y3[stop], color='r')

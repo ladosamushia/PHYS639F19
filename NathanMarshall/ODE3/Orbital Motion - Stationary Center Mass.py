@@ -3,7 +3,7 @@
 Created on Tue Oct  1 13:14:58 2019
 Nathan Marshall
 
-This code simulates the orbit of an obect around a stationary central mass.
+This code simulates the orbit of an object around a stationary central mass.
 """
 #%%
 import matplotlib.pyplot as plt

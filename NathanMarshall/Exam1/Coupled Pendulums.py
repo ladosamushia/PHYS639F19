@@ -45,12 +45,13 @@ def dphi2dt(phi1, phi2):
     return(-1/(m2 * l2**2) * m2 * g * l2 * np.sin(phi2) + k*(x1 - x2))
     
 def energy(phi1, phi2, omega1, omega2):
+    '''Calculate total energy of the system. Should be constant with time.'''
     x1 = l1 * np.sin(phi1)
     x2 = l2 * np.sin(phi2)
     return(m1*g*l1*np.cos(phi1) + m2*g*l2*np.cos(phi2) + (1/2*k*(x2 - x1)**2)
             + 1/2*m1*(l1**2)*(omega1**2) + 1/2*m2*(l2**2)*(omega2**2) )
     
-energies = [energy(phi10, phi20, omega10, omega20)]
+energies = [energy(phi10, phi20, omega10, omega20)] #list to contain energies
     
 while t[-1] < tmax: #run simulation until the time exceeds maximum time
     phi1.append(phi1[-1] + omega1[-1] * dt)

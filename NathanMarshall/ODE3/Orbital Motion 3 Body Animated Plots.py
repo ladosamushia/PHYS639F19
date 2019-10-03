@@ -92,21 +92,27 @@ ax.set_xlabel('X (m)')
 ax.set_ylabel('Y (m)')
 ax.set_xlim(-2.5, 2.5)
 ax.set_ylim(-2.5, 2.5)
+line1, = ax.plot([], [], color='b')
+line2, = ax.plot([], [], color='g')
+line3, = ax.plot([], [], color='r')
+sca1 = ax.scatter([], [], color='b')
+sca2 = ax.scatter([], [], color='g')
+sca3 = ax.scatter([], [], color='r')
+
 #set number of frames
 num_frames = 600
 step = round(len(x1)/num_frames) #step size for the plotted lists
 
 def animation(frame):
     '''Function run to draw each frame of the animation'''
-    ax = plt.gca()
-    for artist in plt.gca().lines + plt.gca().collections:
-        artist.remove() #clear all previous plots each frame
     stop = frame * step #the index at which to stop plotting for current frame
-    ax.plot(x1[0:stop:step], y1[0:stop:step], color='b')
-    ax.plot(x2[0:stop:step], y2[0:stop:step], color='g')
-    ax.plot(x3[0:stop:step], y3[0:stop:step], color='r')
-    ax.scatter(x1[stop], y1[stop], color='b')
-    ax.scatter(x2[stop], y2[stop], color='g')
-    ax.scatter(x3[stop], y3[stop], color='r')
+    line1.set_data(x1[0:stop:step], y1[0:stop:step])
+    line2.set_data(x2[0:stop:step], y2[0:stop:step])
+    line3.set_data(x3[0:stop:step], y3[0:stop:step])
+    sca1.set_offsets([x1[stop], y1[stop]])
+    sca2.set_offsets([x2[stop], y2[stop]])
+    sca3.set_offsets([x3[stop], y3[stop]])
+    return(line1, line2, line3, sca1, sca2, sca3)
+    
 #call the FuncAnimation function
 animate(fig, animation, frames=num_frames, interval=20) 

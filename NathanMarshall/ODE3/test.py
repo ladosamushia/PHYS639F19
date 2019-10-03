@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Oct  2 19:11:11 2019
+Created on Wed Oct  2 21:56:15 2019
 
-This code computes the orbital trajectories of a 3 body system and creates an
-animation of the result. The different part about this code is that the trails
-of the bodies in motion are deleted after they pass a certain length so the
-animation doesn't become too cluttered with trails, allowing for longer 
-simulations.
+@author: Nathan
 """
 #%%
 import matplotlib.pyplot as plt
@@ -102,6 +98,16 @@ sca1 = ax.scatter([], [], color='b')
 sca2 = ax.scatter([], [], color='g')
 sca3 = ax.scatter([], [], color='r')
 
+def init():
+    line1, = ax.plot([], [], color='b')
+    line2, = ax.plot([], [], color='g')
+    line3, = ax.plot([], [], color='r')
+    sca1 = ax.scatter([], [], color='b')
+    sca2 = ax.scatter([], [], color='g')
+    sca3 = ax.scatter([], [], color='r')
+    return(line1, line2, line3, sca1, sca2, sca3)
+
+
 #set number of frames
 num_frames = 800
 step = round(len(x1)/num_frames) #step size for the plotted lists
@@ -121,5 +127,5 @@ def animation(frame):
     return(line1, line2, line3, sca1, sca2, sca3)
  
 #call the FuncAnimation function
-animate(fig, animation, frames=num_frames, interval=30)
-
+animate(fig, animation, frames=num_frames, interval=30, 
+        init_func=init, blit=True)

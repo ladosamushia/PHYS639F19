@@ -1,0 +1,47 @@
+import numpy as np
+import matplotlib.pyplot as plt
+## initial time
+t0 = 0
+tmax = 10
+dt = 0.001
+## initial x coordinate
+x0 = 1
+## initial y coordinate
+y0 = 0
+## initial x component of velocity
+vx0 = 0
+## initial y component of velocity
+vy0 = 1
+## mass of sun
+m1 = 1
+## mass of earth
+m2 = .00001
+## gravitational constant
+G = 1
+## time list
+t = [t0]
+## x position list
+x = [x0]
+## y position list
+y = [y0]
+## x component of velocity list
+vx = [vx0]
+## y component of velocity list
+vy = [vy0]
+n=0
+## 2nd order differential equation for y component of acceleration
+def d2ydt2(x,y):
+    r = np.sqrt(x**2+y**2)
+    return ((-G*m1/r**2)*(y/r))
+## 2nd order differential equation for x component of acceleration
+def d2xdt2(x,y):
+    r = np.sqrt(x**2+y**2)
+    return ((-G*m1/r**2)*(x/r))
+while t0<tmax:
+    t0 += dt
+    t.append(t0)
+    x.append(x[-1]+vx[-1]*dt)
+    y.append(y[-1]+vy[-1]*dt)
+    vx.append(vx[-1]+d2xdt2(x[-1],y[-1])*dt)
+    vy.append(vy[-1]+d2ydt2(x[-1],y[-1])*dt)
+plt.plot(x,y)

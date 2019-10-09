@@ -115,4 +115,4 @@ def animation(frame):
     return(line1, line2, line3, sca1, sca2, sca3)
     
 #call the FuncAnimation function
-animate(fig, animation, frames=num_frames, interval=20) 
+anim = animate(fig, animation, frames=num_frames, interval=20) 

@@ -1,40 +1,36 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Oct  2 19:11:11 2019
+Created on Tue Oct  8 12:40:44 2019
 
-This code computes the orbital trajectories of a 3 body system and creates an
-animation of the result. The different part about this code is that the trails
-of the bodies in motion are deleted after they pass a certain length so the
-animation doesn't become too cluttered with trails, allowing for longer 
-simulations.
+@author: Nathan
 """
 #%%
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation as animate
 
-x10 = -1 #initial x mass 1
+x10 = 0 #initial x mass 1
 y10 = 0 #initial y mass 1
 vx10 = 0 #initial x velocity mass 1
-vy10 = -1.2 #initial y velocity mass 1
+vy10 = 0 #initial y velocity mass 1
 
-x20 = 0.01 #initial x mass 2
+x20 = 1.5 #initial x mass 2
 y20 = 0 #initial y mass 2
 vx20 = 0 #initial x velocity mass 2
-vy20 = 0 #initial y velocity mass 2
+vy20 = 0.8 #initial y velocity mass 2
 
-x30 = 1 #initial x mass 3
+x30 = 1.5003 #initial x mass 3
 y30 = 0 #initial y mass 3
 vx30 = 0 #initial x velocity mass 3
-vy30 = 1.2 #initial y velocity mass 3
+vy30 = 0.82 #initial y velocity mass 3
 
 t0 = 0 #start time
-tmax = 50 #stop time
+tmax = 10 #stop time
 dt = 0.001 #time step size
 
-G = 1 #gravitational constant
-m1 = 1 #mass 1
+G = 0.000001 #gravitational constant
+m1 = 1000000 #mass 1
 m2 = 1 #mass 2
-m3 = 1 #mass 3
+m3 = 0.01 #mass 3
 
 x1 = [x10] #list to contain x values mass 1
 y1 = [y10] #list to contain y values mass 1
@@ -103,7 +99,7 @@ sca2 = ax.scatter([], [], color='g')
 sca3 = ax.scatter([], [], color='r')
 ax.set_aspect('equal')
 #set number of frames
-num_frames = 800
+num_frames = 200
 step = round(len(x1)/num_frames) #step size for the plotted lists
 
 def animation(frame):
@@ -121,5 +117,4 @@ def animation(frame):
     return(line1, line2, line3, sca1, sca2, sca3)
  
 #call the FuncAnimation function
-anim = animate(fig, animation, frames=num_frames, interval=30)
-
+anim = animate(fig, animation, frames=num_frames, interval=50)

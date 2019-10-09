@@ -1,0 +1,54 @@
+import numpy as np
+import matplotlib.pyplot as plt
+## initial conditions
+t0 = 0
+dt = 0.0001
+x0 = 0
+y0 = 0
+v0range = np.linspace(10,100,10)
+v0values = np.zeros(10)
+rangevalues = np.zeros(10)
+tmax = 10000000000
+## launch angle
+theta = 30
+rad = theta*np.pi/180
+## drag coefficient
+a = 0.25
+## gravitational acceleration
+g = 9.81
+## loop through different values for v0
+for i in range(10):
+    v0 = v0range[i]
+    vx0 = v0*np.cos(rad)
+    vy0 = v0*np.sin(rad)
+    ## lists for v0 values
+    vx = [vx0]
+    vy = [vy0]
+    ## y position
+    def d2ydt2 (vy0):
+        return(-g-a*vy0)
+    ## x position
+    def d2xdt2 (vx0):
+        return(-a*vx0)
+    ## lists
+    t = [t0]
+    x = [x0]
+    y = [y0]
+    n = 0
+    ## euler's while loop
+    while y[-1]>0:
+        t.append(t0)
+        x.append(x[n-1]+vx[n]*dt)
+        y.append(y[n-1]+vy[n]*dt)
+        vx.append(vx[n-1]+d2xdt2(vx[n-1])*dt)
+        vy.append(vy[n-1]+d2ydt2(vy[n-1])*dt)
+        n += 1
+        t0 += dt
+## range values
+mx = max(x)
+print(mx)
+print(v0)
+## list for all v0 and range values
+v0values[i] = v0
+rangevalues[i] = mx
+plt.plot(v0values,rangevalues)

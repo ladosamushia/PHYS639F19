@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Oct  8 12:40:44 2019
+Nathan Marshall
 
-@author: Nathan
+This is a stable sun-earth-moon 3-body orbital system. I used actual numbers
+for orbital radius, orbital velocity, and body masses for our sun-earth-moon
+system. The result is displayed in animations relative to the sun and the earth
+so that the orbital motion of the earth around the sun and the moon around the
+earth can be seen.
 """
 #%%
 import matplotlib.pyplot as plt
@@ -13,24 +18,24 @@ y10 = 0 #initial y mass 1
 vx10 = 0 #initial x velocity mass 1
 vy10 = 0 #initial y velocity mass 1
 
-x20 = 1.5 #initial x mass 2
+x20 = 149.6e9 #initial x mass 2
 y20 = 0 #initial y mass 2
 vx20 = 0 #initial x velocity mass 2
-vy20 = 0.8 #initial y velocity mass 2
+vy20 = 30000 #initial y velocity mass 2
 
-x30 = 1.5003 #initial x mass 3
+x30 = x20 + 384.4e6 #initial x mass 3
 y30 = 0 #initial y mass 3
 vx30 = 0 #initial x velocity mass 3
-vy30 = 0.82 #initial y velocity mass 3
+vy30 = vy20 + 1000 #initial y velocity mass 3
 
 t0 = 0 #start time
-tmax = 10 #stop time
-dt = 0.001 #time step size
+tmax = 31536000 #stop time, 1 year in seconds
+dt = 1000#time step size
 
-G = 0.000001 #gravitational constant
-m1 = 1000000 #mass 1
-m2 = 1 #mass 2
-m3 = 0.01 #mass 3
+G = 6.67408e-11 #gravitational constant
+m1 = 1.989e30 #mass 1
+m2 = 5.972e24 #mass 2
+m3 = 7.348e22 #mass 3
 
 x1 = [x10] #list to contain x values mass 1
 y1 = [y10] #list to contain y values mass 1
@@ -85,21 +90,34 @@ while t[-1] < tmax:
     t.append(t[-1] + dt)
 
 #initialize animation figure
-fig = plt.figure('Orbital Trajectory')
-ax = plt.subplot()
+plt.style.use('dark_background')
+fig, [ax, ax2] = plt.subplots(1, 2)
 ax.set_xlabel('X (m)')
 ax.set_ylabel('Y (m)')
-ax.set_xlim(-2.5, 2.5)
-ax.set_ylim(-2.5, 2.5)
-line1, = ax.plot([], [], color='b')
-line2, = ax.plot([], [], color='g')
-line3, = ax.plot([], [], color='r')
-sca1 = ax.scatter([], [], color='b')
-sca2 = ax.scatter([], [], color='g')
-sca3 = ax.scatter([], [], color='r')
+ax.set_xlim(-x30 - 2e10, x30 + 2e10)
+ax.set_ylim(-x30 - 2e10, x30 + 2e10)
+sca1 = ax.scatter([], [], color='y', s=50)
+sca2 = ax.scatter([], [], color='b', s=5)
+sca3 = ax.scatter([], [], color='0.5', s=3)
+line2, = ax.plot([], [], color='b')
 ax.set_aspect('equal')
+ax.set_xlabel('X (m)')
+ax.set_ylabel('Y (m)')
+ax.set_title('Relative to Sun')
+
+sca4 = ax2.scatter([], [], color='0.5')
+sca5 = ax2.scatter(0, 0, color='b', s=70)
+ax2.set_xlim(-500e6, 500e6)
+ax2.set_ylim(-500e6, 500e6)
+ax2.set_aspect('equal')
+ax2.set_xlabel('X (m)')
+ax2.set_ylabel('Y (m)')
+ax2.set_title('Relative to Earth')
+
+fig.suptitle('Sun-Earth-Moon Orbital Motion')
+
 #set number of frames
-num_frames = 200
+num_frames = 400
 step = round(len(x1)/num_frames) #step size for the plotted lists
 
 def animation(frame):
@@ -108,13 +126,13 @@ def animation(frame):
     start = (frame - 20) * step
     if start < 0:
         start = 0
-    line1.set_data(x1[start:stop:step], y1[start:stop:step])
-    line2.set_data(x2[start:stop:step], y2[start:stop:step])
-    line3.set_data(x3[start:stop:step], y3[start:stop:step])
+    line2.set_data(x2[:stop:step], y2[:stop:step])
     sca1.set_offsets([x1[stop], y1[stop]])
     sca2.set_offsets([x2[stop], y2[stop]])
     sca3.set_offsets([x3[stop], y3[stop]])
-    return(line1, line2, line3, sca1, sca2, sca3)
+    sca4.set_offsets([x3[stop]-x2[stop], y3[stop]-y2[stop]])
+    return(sca1, sca2, sca3, sca4)
  
 #call the FuncAnimation function
 anim = animate(fig, animation, frames=num_frames, interval=50)
+

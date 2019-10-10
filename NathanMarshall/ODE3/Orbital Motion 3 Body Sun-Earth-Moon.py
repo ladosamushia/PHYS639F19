@@ -131,7 +131,7 @@ def animation(frame):
     sca2.set_offsets([x2[stop], y2[stop]])
     sca3.set_offsets([x3[stop], y3[stop]])
     sca4.set_offsets([x3[stop]-x2[stop], y3[stop]-y2[stop]])
-    return(sca1, sca2, sca3, sca4)
+    return(line2, sca1, sca2, sca3, sca4)
  
 #call the FuncAnimation function
 anim = animate(fig, animation, frames=num_frames, interval=50)

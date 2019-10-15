@@ -1,0 +1,23 @@
+import numpy as np ## import libraries
+import matplotlib.pyplot as plt
+%matplotlib inline
+## initial conditions
+nsteps = 100000 
+x_initial = 0
+y_initial = 0
+## create array for the steps
+x_array = np.zeros(nsteps +1)
+y_array = np.zeros(nsteps +1)
+## create list for previous values
+x_array[0] = x_initial
+y_array[0] = y_initial
+## loop to make the particle choose one step in x, y, or z direction
+for i in range(nsteps):
+    ## set up each direction to be of equal probability
+    stepx = np.random.choice([-1,1])
+    stepy = np.random.choice([-1,1])
+    ## so that each step builds off of the previous step
+    x_array[i+1] = x_array[i] + stepx
+    y_array[i+1] = y_array[i] + stepy
+fig = plt.figure(figsize=(16,18)) ## resize plot to be readable
+plt.plot(x_array,y_array,z_array) ## plot the randomized walk

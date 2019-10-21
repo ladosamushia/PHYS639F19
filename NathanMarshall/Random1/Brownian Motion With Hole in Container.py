@@ -62,21 +62,30 @@ for i in range(1, num_steps):
     
    
 plt.style.use('default')
-fig, ax = plt.subplots(1,1)
+fig, (ax, ax2) = plt.subplots(1,2)
 ax.set_xlabel('X Displacement (m)')
 ax.set_ylabel('Y Displacement (m)')
-ax.set_title('2D Brownian Motion Diffusion')
+ax.set_title('2D Diffusion - Hole in Container')
 ax.set_xlim([0, 10])
 ax.set_ylim([0, 10])
 sca = ax.scatter([], [])
 ax.set_aspect('equal')
 num_frames = num_steps -1
+t, num = [], []
+line, = ax2.plot(t, num)
+ax2.set_xlabel('Time Step')
+ax2.set_ylabel('Number of Particles')
+ax2.set_title('Number of Particles vs. Time')
 
 def animation(frame):
     ax.collections[0].remove()
     ax.scatter(xplot[frame], yplot[frame], color='r')
+    t.append(frame)
+    num.append(len(xplot[frame]))
+    ax2.lines[0].remove()
+    line, = ax2.plot(t, num, color='b')
     
-anim = animate(fig, animation, frames=num_frames, interval=50)
+anim = animate(fig, animation, frames=num_frames, interval=50, repeat=False)
 
         
         

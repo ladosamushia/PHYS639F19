@@ -1,0 +1,29 @@
+## import libraries
+import numpy as np
+import matplotlib.pyplot as plt
+## variables
+nsteps = 10000
+nparticles = 100
+## boundary and initial conditions
+xbounds = [-20,20]
+ybounds = [-20,20]
+x = np.zeros(100)
+y = np.zeros(100)
+## loop for random steps
+for i in range(nsteps):
+    ## loop for each particle to take their steps
+    for j in range(100):
+        ## random step in x-direction
+        stepx = np.random.choice([-1,1])
+        x[j] += stepx
+        ## condition for if x value exceeds boundary
+        if x[j] < xbounds[0] or x[j] > xbounds[1]:
+            x[j] -= stepx
+        ## random step in y-direction
+        stepy = np.random.choice([-1,1])
+        y[j] += stepy
+        ## condition for if y-value exceeds boundary
+        if y[j] < ybounds[0] or y[j] > ybounds[1]:
+            y[j] -= stepy
+## plot the dispersion of the particles
+plt.plot(x,y,'.')

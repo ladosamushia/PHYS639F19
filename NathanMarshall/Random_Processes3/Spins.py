@@ -19,14 +19,14 @@ xx, yy = np.meshgrid(x, y)
 spins = np.random.choice([-1, 1], (numx, numy))
 
 fig, ax = plt.subplots(1,1)
-Q = ax.quiver(xx, yy, np.zeros((numx, numy)), spins, scale=25)
+Q = ax.quiver(xx, yy, np.zeros((numx, numy)), spins, spins, scale=25, cmap='viridis')
 ax.scatter(xx, yy)
-
+ax.set_aspect('equal')
 #%%
 def update(frame):
     randrow, randcol = np.random.randint(0, numx, 2)
     spins[randrow][randcol] = np.random.choice([-1, 1])
-    Q.set_UVC(np.zeros((numx, numy)), spins)
+    Q.set_UVC(np.zeros((numx, numy)), spins, spins)
     return(Q)
     
 anim = animate(fig, update, frames=100, interval=50)

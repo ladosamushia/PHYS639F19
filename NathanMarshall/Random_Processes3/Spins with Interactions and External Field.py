@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct 22 13:51:00 2019
+Created on Thu Oct 24 13:17:23 2019
 Nathan Marshall
 
-Particle spin with neighbor particle interaction.
+Particle spin with neighbor particle interaction and external magnetic field.
 """
 #%%
 import numpy as np
@@ -15,13 +15,14 @@ numy = 10
 x = np.arange(0, numx)
 y = np.arange(0, numy)
 xx, yy = np.meshgrid(x, y)
-T = 0.1
+T = 1
 spins = np.random.choice([-1, 1], (numx, numy))
+B = -100
 
 fig, ax = plt.subplots(1,1)
 Q = ax.quiver(xx, yy, np.zeros((numx, numy)), spins, spins, scale=25, 
               cmap='plasma')
-ax.scatter(xx, yy)
+#ax.scatter(xx, yy)
 ax.set_aspect('equal')
 #%%
 def update(frame):
@@ -42,6 +43,7 @@ def update(frame):
             energy += -randspin*spins[randrow - 1][randcol]
             energy += -randspin*spins[randrow][randcol + 1]
             energy += -randspin*spins[randrow][randcol - 1]
+    energy += -B * randspin
     if randspin == -1:
         p_down = np.exp(-energy / T) / (np.exp(-energy / T) + np.exp(energy / T))
         p_up = np.exp(energy / T) / (np.exp(-energy / T) + np.exp(energy / T)) 

@@ -1,0 +1,26 @@
+## import libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation as animate
+## set number of particles per dimension
+numx = 20
+numy = 20
+## define each space to have a distinct state
+x=np.arange(0,numx)
+y=np.arange(0,numy)
+## create the grid setup
+xx, yy = np.meshgrid(x,y)
+## set the states to be up or down
+spins = np.random.choice([1,-1], (numx,numy))
+## set the particles at one per grid space and create the scatter plot
+fig, ax = plt.subplots(1,1)
+Q = ax.quiver(xx,yy,np.zeros((numx, numy), spins, scale = 20)
+ax.scatter(xx, yy)
+## call for one random particle to redraw a spin state
+def update(frame):
+    randrow, randcol = np.random.randint(0, numx, 2)
+    spins[randrow][randcol] = np.random.choice(-1,1)
+    Q.set_UVC(np.zeros(numx, numy), spins)
+    return(Q)
+## animate the system
+anim = animate(fig, update, frames=100, interval=50)

@@ -24,4 +24,5 @@ def update(frame):
     return(Q)
 ## animate the system
 anim = animate(fig, update, frames=100, interval=50)
-### I was unable to get the system to animate.  I'm not sure if it's because I was working in Jupyter or I didn't code the function properly, but it didn't seem to want to animate.
+### I was unable to get the system to animate.  I'm not sure if it's because I was working in Jupyter or I didn't code 
+### the function properly, but it didn't seem to want to animate.

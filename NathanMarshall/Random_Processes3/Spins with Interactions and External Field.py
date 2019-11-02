@@ -17,7 +17,7 @@ y = np.arange(0, numy)
 xx, yy = np.meshgrid(x, y)
 T = 1
 spins = np.random.choice([-1, 1], (numx, numy))
-B = -100
+B = 100
 
 fig, ax = plt.subplots(1,1)
 Q = ax.quiver(xx, yy, np.zeros((numx, numy)), spins, spins, scale=25, 

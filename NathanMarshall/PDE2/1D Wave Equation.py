@@ -37,6 +37,7 @@ def update(frame):
     for i in range(1, num_points-1):
         fi[i] += dfi[i] * dt
     line.set_data(x, fi)
+    print(frame)
     return(line,)
     
 anim = animate(fig, update, frames=100, interval=50)

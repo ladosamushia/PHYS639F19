@@ -12,9 +12,10 @@ from matplotlib.animation import FuncAnimation as animate
 
 #set initial conditions of position and derivative of position
 num_points = 100
-fi = np.exp(-(np.linspace(-10, 10, num_points))**2)/2
+fi = np.exp(-(np.linspace(-3, 10, num_points))**2)
 fi[0], fi[-1] = 0, 0
 
+#fi = np.zeros(num_points)
 #for i in range(0, 49):
 #    fi[i] = i / 49
 #for i in range(0, 49):
@@ -37,7 +38,6 @@ def update(frame):
     for i in range(1, num_points-1):
         fi[i] += dfi[i] * dt
     line.set_data(x, fi)
-    print(frame)
     return(line,)
     
 anim = animate(fig, update, frames=100, interval=50)

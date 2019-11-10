@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Nov  7 14:06:58 2019
+Created on Thu Nov  7 13:11:49 2019
 Nathan Marshall
 
+Solving the 2D wave equation numerically using the finite differences
+Laplacian.
 """
 #%%
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation as animate
+from mpl_toolkits.mplot3d import Axes3D
 
 #set initial conditions of position and derivative of position
 num_points = 100
@@ -20,16 +23,18 @@ num_points = 100
 x = np.linspace(-5, 5, num_points)
 y = np.linspace(-5, 5, num_points)
 x, y = np.meshgrid(x, y)
-fi = np.exp(-(x**2+y**2))
+fi = np.exp(-(x**2+y**2)**2)
 dfi = np.zeros((num_points, num_points))
 dt = 0.005
 dx = 0.01
 
 #%% animation
         
-fig, ax = plt.subplots(1,1)
-im = ax.imshow(fi)
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+surf = ax.plot_surface(x, y, fi, cmap='coolwarm')
 ax.set_title('Wave Equation 2D Numerical Solution')
+ax.set_zlim3d(-1, 1)
 
 def update(frame):
     for i in range(1, num_points-1):
@@ -39,8 +44,7 @@ def update(frame):
     for i in range(1, num_points-1):
         for j in range(1, num_points-1):
             fi[i][j] += dfi[i][j] * dt
-    im.set_array(fi)
-    return(im)
+    ax.collections[0].remove()
+    ax.plot_surface(x, y, fi, cmap='coolwarm')
     
 anim = animate(fig, update, frames=100, interval=50)
-

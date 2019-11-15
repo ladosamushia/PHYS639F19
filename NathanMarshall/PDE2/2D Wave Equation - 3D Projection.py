@@ -15,16 +15,16 @@ from mpl_toolkits.mplot3d import Axes3D
 #set initial conditions of position and derivative of position
 num_points = 100
 #standing wave initial conditions
-#x = np.linspace(-2*np.pi, 2*np.pi, num_points)
-#y = np.linspace(-2*np.pi, 2*np.pi, num_points)
-#x, y = np.meshgrid(x, y)
-#fi = np.sin(x)*np.sin(y)
-#gaussian initial conditions
-x = np.linspace(-5, 5, num_points)
-y = np.linspace(-5, 5, num_points)
+x = np.linspace(-2*np.pi, 2*np.pi, num_points)
+y = np.linspace(-2*np.pi, 2*np.pi, num_points)
 x, y = np.meshgrid(x, y)
-fi = np.exp(-(x**2+y**2)**2)
-dfi = np.zeros((num_points, num_points))
+fi = np.sin(x)*np.sin(y)
+#gaussian initial conditions
+#x = np.linspace(-5, 5, num_points)
+#y = np.linspace(-5, 5, num_points)
+#x, y = np.meshgrid(x, y)
+#fi = np.exp(-(x**2+y**2)**2)
+#dfi = np.zeros((num_points, num_points))
 dt = 0.005
 dx = 0.01
 
@@ -48,3 +48,4 @@ def update(frame):
     ax.plot_surface(x, y, fi, cmap='coolwarm')
     
 anim = animate(fig, update, frames=100, interval=50)
+#anim.save('2D Wave Equation - 3D Projection.mp4', fps=30)

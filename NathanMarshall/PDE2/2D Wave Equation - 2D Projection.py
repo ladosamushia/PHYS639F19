@@ -42,5 +42,5 @@ def update(frame):
     im.set_array(fi)
     return(im)
     
-anim = animate(fig, update, frames=100, interval=50)
-
+anim = animate(fig, update, frames=800, interval=50)
+anim.save('2D Wave Equation - 2D Projection.mp4', fps=30)

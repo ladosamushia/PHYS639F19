@@ -9,7 +9,6 @@ Finding the first two solutions using the 'shooting' method.
 #%% Run to find approximate solutions, this takes a while...
 #Run the next section of code to see my predetermined solutions
 import numpy as np
-import matplotlib.pyplot as plt
 
 L = 3 #width of the well
 x0 = 0.4
@@ -43,7 +42,12 @@ for i in range(0, len(bounds)-1):
         cross.append((E[i] + E[i+1])/2)
         
 #%% Plot pre-determined solutions from this code
+import matplotlib.pyplot as plt
+
+L = 3 #width of the well
 cross = [-108.5907658225, -9.0465]
+x0 = 0.4
+dx = 0.01
 for e in cross:
     psi = [0] #starting value of psi, 0 at well edge
     dpsi = [1] #arbitary choice for starting derivative of psi

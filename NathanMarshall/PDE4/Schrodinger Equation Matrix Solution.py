@@ -39,6 +39,8 @@ for i in z: #plot the solutions that we found
     y = y / np.sqrt(np.trapz(y**2, dx=dx)) #normalize the wavefunction
     plt.plot(x, y) #plot the wavefunction
     
+plt.plot(x, u/120, linestyle='dashed', label='Potential')
+plt.ylim(-3, 3)
 plt.title('Schrödinger Equation Lennard-Jones Potential')
 plt.xlabel('x')
 plt.ylabel(r'$\psi(x)$')

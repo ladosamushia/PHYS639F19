@@ -1,24 +1,22 @@
-#########NOT FINISHED YET#############
-
 import matplotlib.pyplot as plt
 
 x10 = -10 #initial x star 1
 y10 = 0 #initial y star 1
 vx10 = 0 #initial x velocity star 1
-vy10 = -20 #initial y velocity star 1
+vy10 = -19 #initial y velocity star 1
 
 x20 = 10 #initial x star 2
 y20 = 0 #initial y star 2
 vx20 = 0 #initial x velocity star 2
-vy20 = 20 #initial y velocity star 2
+vy20 = 19 #initial y velocity star 2
 
 x30 = 0 #initial x mass 3
-y30 = 200 #initial y mass 3
-vx30 = 8 #initial x velocity mass 3
+y30 = 500 #initial y mass 3
+vx30 = 6.2 #initial x velocity mass 3
 vy30 = 0 #initial y velocity mass 3
 
 t0 = 0 #start time
-tmax = 500 #stop time
+tmax = 10000 #stop time
 dt = 0.001 #time step size
 
 G = 1 #gravitational constant
@@ -30,16 +28,22 @@ x1 = [x10] #list to contain x values mass 1
 y1 = [y10] #list to contain y values mass 1
 vx1 = [vx10] #list to contain x velocities mass 1
 vy1 = [vy10] #list to contain y velocities mass 1
+ke1 = [(m1 * ((vx1[-1])**2 + (vy1[-1])**2))/2]
+pe1 = [-(((G * m1 * m2)/(x1[-1]-x2[-1])**1/2) + ((G * m1 * m3)/(x1[-1]-x3[-1])**1/2))]
 
 x2 = [x20] #list to contain x values mass 2
 y2 = [y20] #list to contain y values mass 2
 vx2 = [vx20] #list to contain x velocities mass 2
 vy2 = [vy20] #list to contain y velocities mass 2
+ke2 = [(m2 * ((vx2[-1])**2 + (vy2[-1])**2)**1/2)/2]
+pe2 = [-(((G * m2 * m3)/(x2[-1]-x3[-1])**1/2) + ((G * m2 * m1)/(x2[-1]-x1[-1])**1/2))]
 
 x3 = [x30] #list to contain x values mass 3
 y3 = [y30] #list to contain y values mass 3
 vx3 = [vx30] #list to contain x velocities mass 3
 vy3 = [vy30] #list to contain y velocities mass 3
+ke3 = [(m3 * ((vx3[-1])**2 + (vy3[-1])**2)**1/2)/2]
+pe3 = [-(((G * m3 * m1)/(x3[-1]-x1[-1])**1/2) + ((G * m3 * m2)/(x3[-1]-x2[-1])**1/2))]
 
 t = [t0] #list to contain time values
 
@@ -53,7 +57,7 @@ def gravy(x1, y1, x2, y2, m):
     x = x1 - x2
     y = y1 - y2
     return(- G * m * y / ((x**2 + y**2)**(3/2)))   
-    
+        
 while t[-1] < tmax:
     x1.append(x1[-1] + vx1[-1]*dt)
     y1.append(y1[-1] + vy1[-1]*dt)
@@ -61,6 +65,8 @@ while t[-1] < tmax:
                + gravx(x1[-1], y1[-1], x3[-1], y3[-1], m3)) * dt)
     vy1.append(vy1[-1] + (gravy(x1[-1], y1[-1], x2[-1], y2[-1], m2) +
                gravy(x1[-1], y1[-1], x3[-1], y3[-1], m3)) * dt)
+    ke1.append((m1 * ((vx1[-1])**2 + (vy1[-1])**2))/2)
+    pe1.append(-(((G * m1 * m2)/(x1[-1]-x2[-1])**1/2) + ((G * m1 * m3)/(x1[-1]-x3[-1])**1/2)))
     
     x2.append(x2[-1] + vx2[-1]*dt)
     y2.append(y2[-1] + vy2[-1]*dt)
@@ -68,14 +74,18 @@ while t[-1] < tmax:
                + gravx(x2[-1], y2[-1], x3[-1], y3[-1], m3)) * dt)
     vy2.append(vy2[-1] + (gravy(x2[-1], y2[-1], x1[-1], y1[-1], m1) +
                gravy(x2[-1], y2[-1], x3[-1], y3[-1], m3)) * dt)
-    
+    ke2.append((m2 * ((vx2[-1])**2 + (vy2[-1])**2))/2)
+    pe2.append(-(((G * m2 * m3)/(x2[-1]-x3[-1])**1/2) + ((G * m2 * m1)/(x2[-1]-x1[-1])**1/2)))
+               
     x3.append(x3[-1] + vx3[-1]*dt)
     y3.append(y3[-1] + vy3[-1]*dt)
     vx3.append(vx3[-1] + (gravx(x3[-1], y3[-1], x1[-1], y1[-1], m1) 
                + gravx(x3[-1], y3[-1], x2[-1], y2[-1], m2)) * dt)
     vy3.append(vy3[-1] + (gravy(x3[-1], y3[-1], x1[-1], y1[-1], m1) +
                gravy(x3[-1], y3[-1], x2[-1], y2[-1], m2)) * dt)
-    
+    ke3.append((m3 * ((vx3[-1])**2 + (vy3[-1])**2))/2)
+    pe3.append(-(((G * m3 * m1)/(x3[-1]-x1[-1])**1/2) + ((G * m3 * m2)/(x3[-1]-x2[-1])**1/2)))
+               
     t.append(t[-1] + dt)
 
 #initialize animation figure
@@ -83,10 +93,33 @@ fig = plt.figure('Orbital Trajectory')
 ax = plt.subplot()
 ax.set_xlabel('X (m)')
 ax.set_ylabel('Y (m)')
-ax.set_xlim(-50, 50)
-ax.set_ylim(-50, 50)
+ax.set_xlim(-500, 1000)
+ax.set_ylim(-500, 1000)
 ax.plot(x1,y1,label='star 1')
-ax.plot(x2,y2,label='star2')
+ax.plot(x2,y2,label='star 2')
 ax.plot(x3,y3,label='planet')
 ax.legend()
-#plt.axis('equal')
+plt.draw()
+plt.rcParams["figure.figsize"] = [8,8]
+
+fig = plt.figure('Orbital Energy')
+ax = plt.subplot()
+ax.set_xlabel('Time (s)')
+ax.set_ylabel('Kinetic Energy')
+ax.plot(t,ke1,label='star 1')
+ax.plot(t,ke2,label='star 2')
+ax.plot(t,ke3,label='planet')
+ax.legend()
+plt.draw()
+
+fig = plt.figure('Orbital Trajectory')
+ax = plt.subplot()
+ax.set_xlabel('Time (s)')
+ax.set_ylabel('Potential Energy')
+ax.plot(t,pe1,label='star 1')
+ax.plot(t,pe2,label='star 2')
+ax.plot(t,pe3,label='planet')
+ax.legend()
+plt.draw()
+
+######Kinetic Energy for the planet is negligible and is dominated by the energies of the two stars######
